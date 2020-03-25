@@ -178,6 +178,11 @@ render_comb_axis <- function(self, panel_params, axis=c("primary", "secondary"),
     label_set_levels <- sort(unique(unlist(labels_split)), decreasing = TRUE)
   }
   label_set <- factor(label_set_levels, levels=label_set_levels, ordered=TRUE)
+  # Add missing values to theme
+  default <- theme_combmatrix()
+  for(item in setdiff(names(default), names(theme))){
+    theme[[item]] <- default[[item]]
+  }
   ggpl <- make_combination_matrix_plot(labels=labels,
                                 labels_split = labels_split,
                                 label_set= label_set,
@@ -245,7 +250,7 @@ make_combination_matrix_plot <- function(labels, labels_split, label_set, range,
     geom_point(aes(color= .data$observed), size=theme$combmatrix.panel.point.size) +
     geom_line(data=function(dat) dat[dat$observed, ,drop=FALSE], aes(group = .data$labels),
               size=theme$combmatrix.panel.line.size) +
-    ylab("") +
+    ylab("") + xlab("") +
     scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
     scale_y_discrete(breaks=label_set, labels=if(is.null(names(label_set))) waiver() else names(label_set)) +
     scale_fill_manual(values= c(`TRUE` = theme$combmatrix.panel.striped_background.color.one,
@@ -259,7 +264,8 @@ make_combination_matrix_plot <- function(labels, labels_split, label_set, range,
       axis.text.x = element_blank(),
       axis.ticks.y = element_blank(),
       axis.ticks.length = unit(0, "pt"),
-      axis.title = element_blank(),
+      axis.title.y = element_blank(),
+      axis.title.x = element_blank(),
       axis.line = element_blank(),
       panel.border = element_blank()
     )
