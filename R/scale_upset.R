@@ -29,7 +29,7 @@
 #' @export
 scale_x_mergelist <- function(sep="-", ..., position = "bottom"){
   sc <- discrete_scale(c("x", "xmin", "xmax", "xend"), "position_d", identity, ...,
-                       guide = "none", position = position, super = ScaleMergeList)
+                       guide = ggplot2::waiver(), position = position, super = ScaleMergeList)
   sc2 <- scale_x_discrete(position = position, ...)
   sc$range_c <- sc2$range_c
   sc$internal_text_separator <- sep
@@ -78,7 +78,7 @@ scale_x_upset <- function(order_by = c("freq", "degree"), n_sets = Inf, n_inters
                           sets = NULL, intersections = NULL, reverse=FALSE,
                           ytrans="identity", ..., position = "bottom"){
   sc <- discrete_scale(c("x", "xmin", "xmax", "xend"), "position_d", identity, ...,
-               guide = "none", position = position, super = ScaleUpset)
+               guide = ggplot2::waiver(), position = position, super = ScaleUpset)
   order_by <- match.arg(order_by,  c("freq", "degree"))
   sc$order_by <- order_by
   sc$n_sets <- n_sets
@@ -141,6 +141,9 @@ ScaleMergeList <- ggproto("ScaleMergeList", ScaleDiscretePosition,
     # print("In transform")
     if(is.list(x)){
       x <- collapse_list(self, x)
+    }else{
+      stop("Error in scale_x_mergelist. Aesthetic 'x' must be of type list. It currently is: ",
+           paste0(class(x), collapse = ", "))
     }
     ggproto_parent(ScaleDiscretePosition, self)$transform(x)
   }
@@ -213,9 +216,12 @@ ScaleUpset <- ggproto("ScaleUpset", ScaleMergeList,
        }
        x_string <- factor(x_string, levels = levels, ordered=TRUE)
      }else{
-       x_string <- x
+       stop("Error in scale_upset for aesthetic 'x'. 'x' must be of type list. It currently is: ",
+            paste0(class(LETTERS), collapse = ", "))
      }
-     ggproto_parent(ScaleMergeList, self)$transform(x_string)
+     # Cannot call this anymore because this one must be a list
+     # ggproto_parent(ScaleMergeList, self)$transform(x_string)
+     x_string
    },
 
 
