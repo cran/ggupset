@@ -1,7 +1,7 @@
-0fd6fbe4ca7917ddae4a5651f2a51831 *DESCRIPTION
+7a7b67e39caabe171eaea18f67712b69 *DESCRIPTION
 bd9d6d1feb7bc9778dda11e36eef05f8 *NAMESPACE
-9da138101a67dbbde3686664b5572e37 *NEWS.md
-9d180f1e3164ddc522897ba149e0dd35 *R/axis_combmatrix.R
+ca4ae3bd47e6a8f37634a0cad743d674 *NEWS.md
+f8dda19184c2c8befdc72e9e76f0dd99 *R/axis_combmatrix.R
 1b33c9a8c4052c4cb1534c9e35c7d225 *R/data.R
 b7a0876beb23909061a791991a5d0120 *R/scale_upset.R
 ddc02e907aed7dd5960d0dbf327deba6 *R/theme_combmatrix.R
@@ -35,4 +35,4 @@ cd729bcf8124c53a75a124663066dec1 *man/scale_x_mergelist.Rd
 4423db3ebbe4191b5f3df62773b4b725 *man/theme_combmatrix.Rd
 bcb34f989ad1e510038b9c3859739fc4 *man/tidy_movies.Rd
 945d2680ba13b38b215c190c819b665c *tests/testthat.R
-ae35efefa7cbf5eee7c397f3b910dcad *tests/testthat/test-axis_combmatrix.R
+ebf5b73eed6517c2299945ac94c82f7c *tests/testthat/test-axis_combmatrix.R
